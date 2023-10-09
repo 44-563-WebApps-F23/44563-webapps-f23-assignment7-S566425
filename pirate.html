@@ -118,21 +118,54 @@
         </div>
         <script>
             let n=25;
-            let ids=img[n];
+            let ids={img0,img1,img2,img3,img4,
+                    img5,img6,img7,img8,img9,
+                    img10,img11,img12,img13,img14,
+                    img15,img16,img17,img18,img19,
+                    img20,img21,img22,img23,img24};
             let checkCount=0;
             let penalty=0;
             let lastCheck=0;
             let treasureLocation=5;
             let trapLocation=18;
             let gameOver=false;
-            check(position){
+            function check(position){
                 if(gameOver==false)
                 {
                     document.getElementById("Do nothing")
                 }
-                else{
-                    document.getElementById(ids[position]);
+                // else{
+                //     document.getElementById(ids[position]);
+                // }
+                var id=ids[position];
+                var img=document.getElementById(id);
+
+                if(img==treasureLocation){
+                    img.src="treasure.jpg";
+                    penalty=penalty-3;;
+                    gameOver=true;
+                    
                 }
+                else if(img==trapLocation){
+                    img.src="trap.jpg";
+                    penalty=penalty+4;
+                    gameOver=true;
+
+                }
+                else{
+                    img.src="hat.jpg";
+                }
+                checkCount++;
+                penalty++;
+                var treasureid=document.getElementById("id_locations");
+                var penaltyid= document.getElementById("id_penalty");
+                id_location.innerHTML = `Total Number of Locations Checked is: ${checkCount}`;
+                id_penalty.innerHtml = `Penalty is ${penalty}`;
+                lastCheck=position;
+
+            }
+            function help(){
+                
             }
         </script>
     </body>
