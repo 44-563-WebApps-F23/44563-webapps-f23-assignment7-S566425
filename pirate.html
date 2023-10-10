@@ -56,7 +56,7 @@
                 <img src="location.jpg" width="100" height="100" id="img5" onclick="check(5)">
             </div>
             <div class="col-md-2">
-                <img src="location.jpg"width="100" height="100"id="imgu6" onclick="check(6)">
+                <img src="location.jpg"width="100" height="100"id="img6" onclick="check(6)">
             </div>
             <div class="col-md-2">
                 <img src="location.jpg"width="100" height="100"id="img7" onclick="check(7)">
@@ -110,7 +110,7 @@
                 <img src="location.jpg"width="100" height="100" id="img21"onclick="check(21)">
             </div>
             <div class="col-md-2">
-                <img src="location.jpg"width="100" height="100"id="im22" onclick="check(22)">
+                <img src="location.jpg"width="100" height="100"id="img22" onclick="check(22)">
             </div>
             <div class="col-md-2">
                 <img src="location.jpg"width="100" height="100"id="img23" onclick="check(23)">
@@ -123,32 +123,30 @@
             <button type="button" onclick="help()">Click for help</button>
         </div>
         <script>
-            let ids={img0,img1,img2,img3,img4,
+            let ids=[img0,img1,img2,img3,img4,
                     img5,img6,img7,img8,img9,
                     img10,img11,img12,img13,img14,
                     img15,img16,img17,img18,img19,
-                    img20,img21,img22,img23,img24};
+                    img20,img21,img22,img23,img24];
             let checkCount=0;
-            let penalty=0;
+            var penalty=0;
             let lastCheck=0;
             let treasureLocation=5;
             let trapLocation=18;
             let gameOver=false;
             function check(position){
-                if(gameOver)
+                if(gameOver==false)
                 {
                     return;
                 }
-                // else{
-                //     document.getElementById(ids[position]);
-                // }
                 var id=ids[position];
                 var img=document.getElementById(id);
 
                 if(position==treasureLocation){
                     img.src="treasure.jpg";
-                    penalty=penalty-3;;
                     gameOver=true;
+                    penalty=penalty-3;;
+                    
                     
                 }
                 else if(position==trapLocation){
@@ -164,27 +162,30 @@
                 penalty++;
                 var treasureid=document.getElementById("id_location");
                 var penaltyid= document.getElementById("id_penalty");
-                id_location.innerHTML = `Total Number of Locations Checked is: ${checkCount}`;
-                id_penalty.innerHtml = `Penalty is ${penalty}`;
+                treasureid.innerHTML = `Total Number of Locations Checked is: ${checkCount}`;
+                penaltyid.innerHtml = `Penalty is ${penalty}`;
                 lastCheck=position;
 
             }
             function help(){
+                console.log("triggered");
                 let help=' '
                 let c = treasureLocation%5;
-                let r = Math.floor(treasureLocation)/5;
+                let r = Math.floor(treasureLocation-1)/5;
                 let c1 = lastCheck%5;
-                let r1 = Math.floor(lastCheck)/5;
+                let r1 = Math.floor(lastCheck-1)/5;
 
-                let rdif=Math.abs(r,r1);
-                let cdiff=Math.abs(c,c1);
-                if(Math.abs(r1,c1)===1){
+                let rdif=Math.abs(r-r1);
+                let cdiff=Math.abs(c-c1);
+                if(Math.abs(r1-c1)===1){
                     penalty=penalty+2;
                     id_penalty.textContent=`Penalty is ${penalty}`;
+                    console.log("can smell triggered");
                     document.getElementById("help").textContent = "Can smell it";
                 }
-                else if(rdiff+cdiff===2){
+                else if(rdif+cdiff===2){
                     penalty=penalty+2;
+                    
                     id_penalty.textContent=`Penalty is ${penalty}`;
                     document.getElementById("help").textContent = "Step Faster";
                 }
