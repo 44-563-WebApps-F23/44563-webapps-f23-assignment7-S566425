@@ -123,11 +123,11 @@
             <button type="button" onclick="help()">Click for help</button> 
         </div>
         <script>
-            let ids=[img0,img1,img2,img3,img4,
-                    img5,img6,img7,img8,img9,
-                    img10,img11,img12,img13,img14,
-                    img15,img16,img17,img18,img19,
-                    img20,img21,img22,img23,img24];
+            let ids=["img0", "img1", "img2", "img3", "img4",
+                    "img5", "img6", "img7", "img8", "img9",
+                    "img10", "img11", "img12", "img13", "img14",
+                    "img15", "img16", "img17", "img18", "img19",
+                    "img20", "img21", "img22", "img23", "img24"];
             let checkCount=0;
             var penalty=0;
             let lastCheck=0;
@@ -135,52 +135,45 @@
             let trapLocation=18;
             let gameOver=false;
             function check(position){
-                if(gameOver==false)
+                if(gameOver)
                 {
                     return;
                 }
                 var id=ids[position];
-                var img=document.getElementById(id);
 
-                if(position==treasureLocation){
-                    img.src="treasure.jpg";
+                if(position == treasureLocation){
+                    document.getElementById(id).src="treasure.jpg";
                     gameOver=true;
-                    penalty=penalty-3;;
+                    penalty-=3;;
                     
                     
                 }
                 else if(position==trapLocation){
-                    img.src="trap.jpg";
-                    penalty=penalty+4;
+                    document.getElementById(id).src="trap.jpg";
                     gameOver=true;
+                    penalty+=4;
 
                 }
                 else{
-                    img.src="hat.jpg";
+                    document.getElementById(id).src="hat.jpg";
                 }
                 checkCount++;
                 penalty++;
-                var treasureid=document.getElementById("id_location");
-                var penaltyid= document.getElementById("id_penalty");
-                treasureid.innerHTML = `Total Number of Locations Checked is: ${checkCount}`;
-                penaltyid.innerHtml = `Penalty is ${penalty}`;
+                document.getElementById("locations").innerhtml = `Number of Locations Checked is: ${checkCount}`;
+                document.getElementById("penalty").innerHtml = `Penalty is: ${penalty}`;
                 lastCheck=position;
 
             }
             function help(){
-                console.log("triggered");
-                let help=' '
-                let c = treasureLocation%5;
-                let r = Math.floor(treasureLocation-1)/5;
-                let c1 = lastCheck%5;
-                let r1 = Math.floor(lastCheck-1)/5;
 
-                let rdif=Math.abs(r-r1);
-                let cdiff=Math.abs(c-c1);
-                if(Math.abs(r1-c1)===1){
-                    penalty=penalty+2;
-                    id_penalty.textContent=`Penalty is ${penalty}`;
-                    console.log("can smell triggered");
+                let col = treasureLocation%5;
+                let row = Math.floor(treasureLocation-1)/5;
+                let lastcol = lastCheck%5;
+                let lastrow = Math.floor(lastCheck-1)/5;
+
+                let rdif=Math.abs(row-lastrow);
+                let cdiff=Math.abs(col-lastcol);
+                if(Math.abs(lastrow-lastcol)===1){
                     document.getElementById("help").textContent = "Can smell it";
                 }
                 else if(rdif+cdiff===2){
@@ -190,7 +183,7 @@
                     document.getElementById("help").textContent = "Step fatser";
                 }
                 penalty=penalty+2;
-                id_penalty.textContent=`Penalty is ${penalty}`;
+                document.getElementById("penalty").textContent=`Penalty is ${penalty}`;
 
             }
 
