@@ -38,11 +38,8 @@
     <button onclick="remove()">Remove Data</button>
 	<p> Press the button to add elements at the beginning to the container.</p>
     <button onclick="addFront()">Add Front</button>
-	
-	
 </body>
 <script>
-
 		function addEnd(){
 			text = document.getElementById("text").value;
 			output=document.createElement("div");
@@ -54,13 +51,11 @@
 		function remove(){
 			mergerItems = document.getElementsByClassName("merger");
             length = mergerItems.length;
-
             if (length > 0) {
                 middleItem = Math.floor(length/2);
                 mergerItems[middleItem].remove();
             }
         }
-
         function addFront() {
             text = document.getElementById("text").value;
             output = document.createElement("div");
