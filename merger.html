@@ -4,11 +4,11 @@
     <style>
     .flex-container {
       display: flex;  flex-direction:row;
-      background-color: red;
+      background-color: plum;
   }
 
 .flex-container > div {  /*div children of the flex container*/
-  background-color: #f1f1f1; 
+  background-color:lavender; 
   margin: 10px;  padding: 20px;  font-size: 30px;
 }
 
@@ -16,7 +16,7 @@
 @media (max-width: 600px) { 
 	 .flex-container{
 		 flex-direction:column;
-		 background-color: green;
+		 background-color:lightblue;
 	  }
 	}
 </style></head>
@@ -24,34 +24,53 @@
 
 
 <body>
-    <h2>Sri Vasavi builds a merger</h2>
+    <h2> Sri Vasavi builds a merger</h2>
 		<div class="flex-container" id="target">
 		  <div class="merger">row item 1</div>   
-		  <div class="mergers">row item 2</div>  
+		  <div class="merger">row item 2</div>  
 		  <div class="merger">row item 3</div>  
 		</div>
-        <div>
-            
-        </div>
-	
-	<p> Press the button to create an new element of type div and then add it to the container.
-		</p>
-        <input type="text">
-		<button onclick="makeNewDiv()">Add end</button>
+        
+	<input type="text" id="text" value="Enter Text">
+	<p> Press the button to add elements at the end to the container.</p>
+    <button onclick="addEnd()">Add End</button>    
+	<p> Press the button to Remove the elements from the container.</p>
+    <button onclick="remove()">Remove Data</button>
+	<p> Press the button to add elements at the beginning to the container.</p>
+    <button onclick="addFront()">Add Front</button>
 	
 	
 </body>
 <script>
-	function makeNewDiv(){
-		/* make the div and its text */
-		let element = document.createElement("div")
-		element.innerHTML = "an item after 3"
-		element.style.color = "orange"
 
-		/* add it to the container */
-		let container = document.getElementById('target')
-		container.appendChild(element)
+		function addEnd(){
+			text = document.getElementById("text").value;
+			output=document.createElement("div");
+			output.innerHTML=text;
+			output.className="merger";
+			flex= document.getElementById("target");
+			flex.appendChild(output);
+		}
+		function remove(){
+			mergerItems = document.getElementsByClassName("merger");
+            length = mergerItems.length;
+
+            if (length > 0) {
+                middleItem = Math.floor(length/2);
+                mergerItems[middleItem].remove();
+            }
+        }
+
+        function addFront() {
+            text = document.getElementById("text").value;
+            output = document.createElement("div");
+            output.innerHTML = text;
+            output.className = "merger";
+            flex = document.getElementById("target");
+            firstChild = flex.firstChild;
+            flex.insertBefore(output, firstChild);
+        }
 		
-	}
+	//}
 </script>
 </html>	
