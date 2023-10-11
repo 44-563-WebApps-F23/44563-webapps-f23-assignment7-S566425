@@ -31,7 +31,7 @@
         <p>Click on the locations to search for treasure, beware the traps</p>
         <p id ="locations">Number of locations checked is zero</p>
         <p id="penalty">Penality is zero</p>
-        <p id="click" onclick="help()">Click for help</p>
+        <p type="button" id="click" onclick="help()">Click for help</p>
         <p id="help">Help report</p>
 
         <div class="flex-containers row">
@@ -119,9 +119,6 @@
                 <img src="location.jpg"width="100" height="100"id="img24" onclick="check(24)">
             </div>
         </div>
-        <div>
-            <button type="button" onclick="help()">Click for help</button> 
-        </div>
         <script>
             let ids=["img0", "img1", "img2", "img3", "img4",
                     "img5", "img6", "img7", "img8", "img9",
@@ -167,20 +164,21 @@
             function help(){
 
                 let col = treasureLocation%5;
-                let row = Math.floor(treasureLocation-1)/5;
+                let row = Math.round(treasureLocation/5);
                 let lastcol = lastCheck%5;
-                let lastrow = Math.floor(lastCheck-1)/5;
-
-                let rdif=Math.abs(row-lastrow);
-                let cdiff=Math.abs(col-lastcol);
-                if(Math.abs(lastrow-lastcol)===1){
+                let lastrow = Math.round(lastCheck/5);
+                
+                let rdif=Math.abs(lastrow-row);
+                let cdiff=Math.abs(lastcol-col);
+                let dif=Math.abs(rdif-cdiff)
+                if(rdif==0 || cdiff==0 && dif==1){
                     document.getElementById("help").textContent = "Can smell it";
                 }
-                else if(rdif+cdiff===2){
+                else if(rdif+cdiff==2){
                     document.getElementById("help").textContent = "Close matier";
                 }
                 else{
-                    document.getElementById("help").textContent = "Step fatser";
+                    document.getElementById("help").textContent = "Step faster";
                 }
                 penalty=penalty+2;
                 document.getElementById("penalty").textContent=`Penalty is ${penalty}`;
