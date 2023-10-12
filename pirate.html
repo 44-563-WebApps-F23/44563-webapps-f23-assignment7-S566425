@@ -33,6 +33,7 @@
         <p id="penalty">Penality is zero</p>
         <p type="button" id="click" onclick="help()">Click for help</p>
         <p id="help">Help report</p>
+        <p type="button" onclick="newGame()">New Game</p>
 
         <div class="flex-containers row">
             <div class="col-md-2" >
@@ -156,8 +157,8 @@
                 }
                 checkCount++;
                 penalty++;
-                document.getElementById("locations").innerhtml = `Number of Locations Checked is: ${checkCount}`;
-                document.getElementById("penalty").innerHtml = `Penalty is: ${penalty}`;
+                document.getElementById("locations").innerHTML = `Number of Locations Checked is ${checkCount}`;
+                document.getElementById("penalty").innerHTML = `Penalty is ${penalty}`;
                 lastCheck=position;
 
             }
@@ -184,6 +185,25 @@
                 document.getElementById("penalty").textContent=`Penalty is ${penalty}`;
 
             }
+
+            function newGame(){
+                treasureLocation = Math.floor(Math.random() * 25);
+                trapLocation = Math.floor(Math.random() * 25);
+                for( i=0; i<24; i++){
+                    if(i === trapLocation){
+                        document.getElementById(ids[i]).src = "trap.jpg";
+                    }
+                    else if(i === treasureLocation){
+                        document.getElementById(ids[i]).src = "treasure.jpg";
+                    }
+                    else{
+                        document.getElementById(ids[i]).src = "location.jpg";
+                    }
+                }
+            }
+    
+            document.getElementById("locations").innerHTML = `Number of locations checked is  ${checkCount}`;
+            document.getElementById("penalty").innerHTML = `Penalty is ${penalty}`;
 
         </script>
     </body>
