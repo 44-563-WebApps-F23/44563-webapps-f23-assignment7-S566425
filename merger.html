@@ -31,22 +31,24 @@
 		  <div class="merger">row item 3</div>  
 		</div>
         
-	<input type="text" id="text" value="Enter Text">
+	<input type="text" id="input" value="Enter Text">
 	<p> Press the button to add elements at the end to the container.</p>
     <button onclick="addEnd()">Add End</button>    
 	<p> Press the button to Remove the elements from the container.</p>
     <button onclick="remove()">Remove Data</button>
 	<p> Press the button to add elements at the beginning to the container.</p>
     <button onclick="addFront()">Add Front</button>
+  <p>Press the button to swap the elements in a container</p>
+    <button onclick="swap()">Swap</button>
 </body>
 <script>
 		function addEnd(){
-			text = document.getElementById("text").value;
+			input = document.getElementById("input").value;
 			output=document.createElement("div");
-			output.innerHTML=text;
+			output.innerHTML=input;
 			output.className="merger";
-			flex= document.getElementById("target");
-			flex.appendChild(output);
+			container= document.getElementById("target");
+			container.appendChild(output);
 		}
 		function remove(){
 			mergerItems = document.getElementsByClassName("merger");
@@ -57,13 +59,22 @@
             }
         }
         function addFront() {
-            text = document.getElementById("text").value;
+            input = document.getElementById("input").value;
             output = document.createElement("div");
-            output.innerHTML = text;
+            output.innerHTML = input;
             output.className = "merger";
-            flex = document.getElementById("target");
-            firstChild = flex.firstChild;
-            flex.insertBefore(output, firstChild);
+            container = document.getElementById("target");
+            firstChild = container.firstChild;
+            container.insertBefore(output, firstChild);
+        }
+        function swap(){
+          let mergerItems=document.getElementsByClassName("merger");
+          let length=mergerItems.length;
+          let item=document.getElementsByClassName("merger")[Math.floor(Math.random()*length)];
+          let container=document.getElementById("target")
+          firstChild=container.firstChild;
+          container.insertBefore(item, firstChild);
+
         }
 		
 	//}
